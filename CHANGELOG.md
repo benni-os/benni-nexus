@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+- Zod schema validation for `nexus.config.json` on startup — invalid configs now fail fast with a clear, field-by-field error message and exit code 1 instead of cryptic runtime errors (#9)
+
 ## [0.1.0] — 2026-08-02
 
 ### Added
