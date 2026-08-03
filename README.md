@@ -1,54 +1,72 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f0c29,50:302b63,100:24243e&height=200&section=header&text=benni-nexus&fontSize=72&fontColor=ffffff&fontAlignY=38&desc=LLM%20Gateway%20for%20the%20Benni%20OS%20Ecosystem&descAlignY=58&descSize=18" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0D0D0D,50:302b63,100:7000FF&height=200&section=header&text=benni-nexus&fontSize=72&fontColor=ffffff&fontAlignY=38&desc=LLM%20Gateway%20for%20the%20Benni%20OS%20Ecosystem%20%E2%80%94%20Route.%20Balance.%20Observe.&descAlignY=58&descSize=16&animation=fadeIn" width="100%"/>
 
-[![CI](https://github.com/benni-os/benni-nexus/actions/workflows/ci.yml/badge.svg)](https://github.com/benni-os/benni-nexus/actions)
-[![npm version](https://img.shields.io/npm/v/benni-nexus?style=flat-square&color=CB3837&logo=npm)](https://www.npmjs.com/package/benni-nexus)
-[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=flat-square)](LICENSE)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Node](https://img.shields.io/badge/Node.js-%E2%89%A520-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org)
-[![Fastify](https://img.shields.io/badge/Fastify-v5-000000?style=flat-square&logo=fastify)](https://fastify.dev)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square)](CONTRIBUTING.md)
+<br/>
 
-**Route. Balance. Observe. All your LLMs from a single endpoint.**
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=20&duration=3000&pause=800&color=7000FF&center=true&vCenter=true&multiline=true&repeat=true&width=800&height=80&lines=One+Endpoint.+All+Your+LLMs.+Zero+Hardcoding.;cheap-first+%E2%80%A2+fast-first+%E2%80%A2+quality-first+%E2%80%A2+failover;OpenAI-Compatible+%E2%80%94+Drop-In+for+Any+SDK" alt="Typing SVG" />
 
-[Quick Start](#-quick-start) · [Configuration](#%EF%B8%8F-configuration) · [Routing Strategies](#-routing-strategies) · [Roadmap](ROADMAP.md) · [Contributing](CONTRIBUTING.md)
+<br/><br/>
+
+[![npm](https://img.shields.io/npm/v/benni-nexus?style=for-the-badge&logo=npm&logoColor=white&color=7000FF)](https://www.npmjs.com/package/benni-nexus)
+[![CI](https://img.shields.io/github/actions/workflow/status/benni-os/benni-nexus/ci.yml?branch=main&style=for-the-badge&logo=githubactions&logoColor=white&label=CI)](https://github.com/benni-os/benni-nexus/actions)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-00B0FF?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Fastify](https://img.shields.io/badge/Fastify-v5-FF007A?style=for-the-badge&logo=fastify&logoColor=white)](https://fastify.dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-00C853?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](LICENSE)
+[![Part of Benni OS](https://img.shields.io/badge/Part%20of-Benni%20OS-0D0D0D?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/benni-os)
+
+<br/>
+
+> **"One endpoint. All your LLMs. Zero hardcoding."**
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png" width="100%"/>
 
 </div>
 
----
+<br/>
 
-## ✨ Why benni-nexus?
+## ⭐ What Is benni-nexus?
 
-Every production AI stack ends up solving the same problem: **you have multiple LLM backends and every app hardcodes a different one**. Local Ollama for dev, Groq for speed, OpenAI for quality, Gemini for multimodal. You end up with configuration scattered across a dozen services.
+**benni-nexus** is the intelligent LLM gateway of the **[Benni OS](https://github.com/benni-os)** ecosystem — a single OpenAI-compatible endpoint that routes, balances, and observes all your LLM backends automatically.
 
-`benni-nexus` is the **single intelligent gateway** that sits in front of all of them. One endpoint, one config file, one place to add a new model.
+Every production AI stack ends up hardcoding different backends: local Ollama for dev, Groq for speed, OpenAI for quality. `benni-nexus` puts a single intelligent router in front of all of them.
 
 ```
-                    ┌────────────────────────┐
-                    │                        │
-  Your App  ►►►►►►►►►  POST /v1/chat/completions  │
-                    │                        │
-  Any SDK    ►►►►►►►►  (OpenAI-compatible)     │
-  (OpenAI,           │                        │
-   LangChain,        │      benni-nexus        │
-   LlamaIndex...)    │    ┌────────────┐    │
-                    │    │   Router    │    │
-                    │    └─────┬─────┘    │
-                    └──────────┼───────────┘
-                               │
-           ┌───────────┼───────────┐
-           │          │           │          │
-    ▼              ▼             ▼          ▼
- ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐
- │Ollama│  │ Groq │  │OpenAI│  │Gemini│
- │(local)│  │(fast)│  │(qual.)│ │(multi)│
- └──────┘  └──────┘  └──────┘  └──────┘
+Your App / Any SDK (OpenAI, LangChain, LlamaIndex, Vercel AI...)
+         ↓ POST /v1/chat/completions (OpenAI-compatible)
+    ┌─────────────────────────┐
+    │      benni-nexus           │
+    │   ┌────────────┐          │
+    │   │   Router    │          │
+    │   └─────┬─────┘          │
+    └──────────│────────────┘
+         ┬─────────┬────────┬
+    Ollama   Groq    OpenAI   Gemini
+   (local)  (fast)  (quality) (multi)
 ```
 
----
+<br/>
 
-## ⚡ Quick Start
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png" width="100%"/>
+
+## ⚡ Core Doctrine
+
+> These are not settings. These are architecture laws.
+
+| ☔ Principle | 🔧 Implementation |
+|---|---|
+| **Single Endpoint** | One `POST /v1/chat/completions` — every backend behind it, no app rewrites |
+| **Strategy-Driven Routing** | `cheap-first` · `fast-first` · `quality-first` · `round-robin` · `failover` |
+| **OpenAI-Compatible** | Drop-in for any SDK — LangChain, LlamaIndex, Vercel AI, AutoGen, CrewAI |
+| **Local-First Option** | Ollama as first-class backend — zero cloud required for dev |
+| **Observable by Default** | Prometheus metrics + per-backend health checks (v0.2 roadmap) |
+| **Zero Lock-In** | Add or remove backends via config — no code changes, no redeployment |
+
+<br/>
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png" width="100%"/>
+
+## 🚀 Quick Start
 
 ```bash
 # Install globally
@@ -72,58 +90,19 @@ const client = new OpenAI({
   apiKey: 'nexus', // any string
 });
 
-// benni-nexus picks the best backend automatically
 const res = await client.chat.completions.create({
-  model: 'auto',
+  model: 'auto', // benni-nexus picks the best backend
   messages: [{ role: 'user', content: 'Explain MCP in one paragraph.' }],
 });
-
-console.log(res.choices[0].message.content);
 ```
 
-> Works with **LangChain**, **LlamaIndex**, **Vercel AI SDK**, **AutoGen**, **CrewAI** — anything that speaks OpenAI.
+<br/>
 
----
-
-## ⚙️ Configuration
-
-Run `nexus init` to generate `nexus.config.json`:
-
-```json
-{
-  "port": 4000,
-  "strategy": "cheap-first",
-  "backends": [
-    {
-      "name": "ollama",
-      "type": "ollama",
-      "url": "http://localhost:11434",
-      "models": ["llama3.1:8b", "mistral:7b"]
-    },
-    {
-      "name": "groq",
-      "type": "groq",
-      "apiKey": "$GROQ_API_KEY"
-    },
-    {
-      "name": "openai",
-      "type": "openai",
-      "apiKey": "$OPENAI_API_KEY"
-    },
-    {
-      "name": "gemini",
-      "type": "gemini",
-      "apiKey": "$GEMINI_API_KEY"
-    }
-  ]
-}
-```
-
----
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png" width="100%"/>
 
 ## 🎯 Routing Strategies
 
-| Strategy | Description | Best for |
+| Strategy | Description | Best For |
 |---|---|---|
 | `cheap-first` | Local models first, cloud as fallback | Dev environments, cost-sensitive workloads |
 | `fast-first` | Routes to lowest measured P50 latency | Real-time apps, chat UIs |
@@ -131,19 +110,28 @@ Run `nexus init` to generate `nexus.config.json`:
 | `round-robin` | Even distribution across all backends | Load testing, equal-quality backends |
 | `failover` | Primary with automatic fallback chain | High-availability production |
 
-### Explicit model routing
+<br/>
 
-Pass a specific model name and benni-nexus routes directly to the backend that declares it:
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png" width="100%"/>
 
-```typescript
-// Routes to whichever backend has 'llama3.1:8b' in its models[]
-await client.chat.completions.create({
-  model: 'llama3.1:8b',
-  messages: [...]
-});
+## ⚙️ Configuration
+
+```json
+{
+  "port": 4000,
+  "strategy": "cheap-first",
+  "backends": [
+    { "name": "ollama", "type": "ollama", "url": "http://localhost:11434", "models": ["llama3.1:8b", "mistral:7b"] },
+    { "name": "groq",   "type": "groq",   "apiKey": "$GROQ_API_KEY" },
+    { "name": "openai", "type": "openai", "apiKey": "$OPENAI_API_KEY" },
+    { "name": "gemini", "type": "gemini", "apiKey": "$GEMINI_API_KEY" }
+  ]
+}
 ```
 
----
+<br/>
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png" width="100%"/>
 
 ## 🔌 Supported Backends
 
@@ -153,27 +141,14 @@ await client.chat.completions.create({
 | **Groq** | `groq` | Ultra-fast inference on Llama, Mixtral |
 | **OpenAI** | `openai` | GPT-4o, GPT-4o-mini, o1... |
 | **Google Gemini** | `gemini` | Gemini 2.0 Flash, Pro |
-| **Anthropic** *(coming in v0.3)* | `anthropic` | Claude 3.5, Claude 4... |
-| **Custom** *(coming in v0.3)* | `custom` | Any OpenAI-compatible endpoint |
+| **Anthropic** *(v0.3)* | `anthropic` | Claude 3.5, Claude 4... |
+| **Custom** *(v0.3)* | `custom` | Any OpenAI-compatible endpoint |
 
----
+<br/>
 
-## 🧱 Part of the Benni OS Ecosystem
-
-`benni-nexus` is a core infrastructure component of the **[Benni OS](https://github.com/benni-os)** — an open-source operating system for autonomous AI agents.
-
-| Project | Description | Status |
-|---|---|---|
-| [**mcp-forge**](https://github.com/benni-os/mcp-forge) | FastAPI-style framework for building MCP servers | ✅ stable |
-| [**benni-nexus**](https://github.com/benni-os/benni-nexus) | LLM gateway and intelligent router | ✅ stable |
-| **agent-memory** *(coming soon)* | Vector memory system for AI agents | 🛠️ building |
-| **vidgen-pipeline** *(coming soon)* | AI video generation pipeline | 🛠️ planned |
-
----
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png" width="100%"/>
 
 ## 📊 Observability *(v0.2 roadmap)*
-
-Upcoming in v0.2: built-in Prometheus metrics, per-backend health checks, and a live dashboard.
 
 ```
 GET /metrics
@@ -184,21 +159,11 @@ nexus_latency_p50_ms{backend="ollama"} 142
 nexus_latency_p50_ms{backend="groq"} 38
 ```
 
----
+Prometheus metrics + per-backend health checks + live dashboard — coming in v0.2.
 
-## 🚀 Deploy
+<br/>
 
-```bash
-# Docker (coming in v1.0)
-docker run -p 4000:4000 \
-  -v $(pwd)/nexus.config.json:/app/nexus.config.json \
-  ghcr.io/benni-os/benni-nexus
-
-# Railway / Fly.io (coming in v0.3)
-nexus deploy --target railway
-```
-
----
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png" width="100%"/>
 
 ## 🛠️ Development
 
@@ -211,24 +176,42 @@ npm test          # vitest
 npm run typecheck # tsc --noEmit
 ```
 
----
+<br/>
+
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png" width="100%"/>
 
 ## 🤝 Contributing
 
 All contributions welcome. Check [good first issues](https://github.com/benni-os/benni-nexus/labels/good%20first%20issue) for beginner-friendly tasks.
-
 See [CONTRIBUTING.md](CONTRIBUTING.md) for full guidelines.
 
----
+<br/>
 
-## 📝 License
+<img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/dark.png" width="100%"/>
 
-MIT © [Benni Alencar](https://github.com/benni-os)
+## 🌐 Benni OS Ecosystem
 
----
+| Product | Repo | Role | Status |
+|---|---|---|---|
+| 🧠 **Benni Master OS** | [benni-os/Benni-Master-OS](https://github.com/benni-os/Benni-Master-OS) | General Brain — sovereign orchestrator | 🟢 Live |
+| ⚡ **Benni Gravity** | [benni-os/Benni-gravity-0](https://github.com/benni-os/Benni-gravity-0) | Local operator runtime | 🟢 Ativo |
+| 🔌 **Operator Gateway** | [benni-os/benni-operator-gateway](https://github.com/benni-os/benni-operator-gateway) | Open-source MCP HTTP gateway | 🟢 MIT |
+| 🐍 **mcp-forge** | [benni-os/mcp-forge](https://github.com/benni-os/mcp-forge) | FastAPI-style Python MCP framework | 🟢 PyPI |
+| ⚡ **benni-nexus** | [benni-os/benni-nexus](https://github.com/benni-os/benni-nexus) | LLM gateway — you are here | 🟢 npm |
+| 🛠️ **Benni Control Plane** | MCP on Railway | NEXUS v5 — persistent memory layer | 🟢 Railway |
+| 🤖 **JARVAS-2** | [benni-os/jarvas-2](https://github.com/benni-os/jarvas-2) | Autonomous dispatch + Wave 6 billing | 🔥 Hot |
+| 🛍️ **Modo Operador** | [benni-os/modo-operador](https://github.com/benni-os/modo-operador) | Produto BR — R$97 | 🟢 Live |
+
+<br/>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:7000FF,50:302b63,100:0D0D0D&height=120&section=footer" width="100%"/>
 
 <div align="center">
 
-<sub>Built with ⚡ as part of the <a href="https://github.com/benni-os">Benni OS</a> open-source ecosystem</sub>
+**benni-nexus** — *Open-Source LLM Gateway by [Benni OS](https://github.com/benni-os)*
+
+`SINGLE_ENDPOINT` • `STRATEGY_ROUTING` • `OPENAI_COMPATIBLE` • `LOCAL_FIRST` • `MIT_LICENSE`
+
+Built by [Benni Alencar](https://github.com/nsfwbunny)
 
 </div>
